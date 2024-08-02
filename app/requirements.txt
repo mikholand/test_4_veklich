@@ -1,0 +1,8 @@
+fastapi
+pymongo
+pydantic
+python-multipart
+redis
+uvicorn
+aiofiles
+jinja2

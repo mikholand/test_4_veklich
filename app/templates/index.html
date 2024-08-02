@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чат</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>Чат</h1>
+    <form action="/api/v1/message/" method="post">
+        <label for="username">Имя:</label>
+        <input type="text" id="username" name="username" required>
+        <label for="content">Сообщение:</label>
+        <textarea id="content" name="content" required></textarea>
+        <button type="submit">Отправить сообщение</button>
+    </form>
+    <div class="message-list">
+        {% for message in messages %}
+        <div class="message">
+            <strong>{{ message.username }}</strong>: {{ message.content }}
+        </div>
+        {% endfor %}
+    </div>
+    <div class="pagination">
+        {% if page > 1 %}
+        <a href="/?page={{ page - 1 }}">Предыдущая</a>
+        {% else %}
+        <span class="disabled">Предыдущая</span>
+        {% endif %}
+        <span>Страница {{ page }} из {{ total_pages }}</span>
+        {% if page < total_pages %}
+        <a href="/?page={{ page + 1 }}">Следующая</a>
+        {% else %}
+        <span class="disabled">Следующая</span>
+        {% endif %}
+    </div>
+</body>
+</html>
